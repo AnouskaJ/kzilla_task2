@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     leading: const CircleAvatar(
                       child: Icon(Icons.home),
                     ),
-                    title: Text(index.toString())));
+                    title: Text((index + 1).toString())));
           }),
         ),
       ),
