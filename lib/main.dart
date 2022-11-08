@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -12,11 +12,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'SRMKZILLA',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.yellow,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'List Project'),
     );
   }
 }
@@ -31,39 +31,40 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
+  int item_count = 10;
+  void changecount() {
     setState(() {
-      _counter++;
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values.
+      Random random = new Random();
+      int randomNumber = random.nextInt(100);
+      item_count = randomNumber;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times: ',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+      appBar: AppBar(title: Text("List View")),
+      body: SafeArea(
+        child: ListView.builder(
+          itemCount: item_count,
+          itemBuilder: ((context, index) {
+            return Card(
+                child: ListTile(
+                    leading: const CircleAvatar(
+                      child: Icon(Icons.home),
+                    ),
+                    title: Text(index.toString())));
+          }),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        onPressed: changecount,
+        tooltip: "Change the range",
+        child: const Icon(Icons.change_circle_rounded),
+      ),
     );
   }
 }
